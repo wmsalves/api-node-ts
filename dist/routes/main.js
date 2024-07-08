@@ -8,4 +8,4 @@ exports.router = router;
 router.get("/", (req, res) => {
     return res.send("Hello World");
 });
-router.post("/cities", controllers_1.CitiesController.createBodyValidator, controllers_1.CitiesController.createValidation, controllers_1.CitiesController.create);
+router.post("/cities", controllers_1.CitiesController.createValidation, controllers_1.CitiesController.create);

@@ -32,18 +32,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.create = exports.createValidation = exports.createBodyValidator = void 0;
+exports.create = exports.createValidation = void 0;
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
-const bodyValidation = yup.object().shape({
-    name: yup.string().required().min(3),
-    state: yup.string().required().min(3),
-});
-const queryValidation = yup.object().shape({
-    filter: yup.string().required().min(3),
-});
-exports.createBodyValidator = (0, middlewares_1.validation)("body", bodyValidation);
-exports.createValidation = (0, middlewares_1.validation)("query", queryValidation);
+exports.createValidation = (0, middlewares_1.validation)((getShema) => ({
+    body: getShema(yup.object().shape({
+        name: yup.string().required().min(3),
+        state: yup.string().required().min(3),
+    })),
+    query: getShema(yup.object().shape({
+        filter: yup.string().required().min(3),
+    })),
+}));
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     return res.send("Create!");

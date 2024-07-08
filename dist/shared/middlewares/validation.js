@@ -11,25 +11,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validation = void 0;
 const http_status_codes_1 = require("http-status-codes");
-const validation = (field, scheme) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield scheme.validate(req[field], {
-            abortEarly: false,
-        });
+const validation = (getAllSchemas) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const schemas = getAllSchemas((schema) => schema);
+    const errorsResult = {};
+    Object.entries(schemas).forEach(([key, schema]) => {
+        try {
+            // validateSync espera a validação acontecer pra depois retornar algo
+            schema.validateSync(req[key], {
+                abortEarly: false,
+            });
+        }
+        catch (err) {
+            const yupError = err;
+            // record é um objeto que possui chaves de um tipo especifico e valores de outro tipo especifico
+            const errors = {};
+            yupError.inner.forEach((error) => {
+                if (error.path === undefined)
+                    return;
+                // atribuindo mensagem de erro ao erro mapeado
+                errors[error.path] = error.message;
+            });
+            errorsResult[key] = errors;
+        }
+    });
+    if (Object.entries(errorsResult).length === 0) {
         return next();
     }
-    catch (err) {
-        const yupError = err;
-        // record é um objeto que possui chaves de um tipo especifico e valores de outro tipo especifico
-        const errors = {};
-        yupError.inner.forEach((error) => {
-            if (error.path === undefined)
-                return;
-            // atribuindo mensagem de erro ao erro mapeado
-            errors[error.path] = error.message;
-        });
+    else {
         return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
-            errors,
+            errors: errorsResult,
         });
     }
 });
