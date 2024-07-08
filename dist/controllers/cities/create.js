@@ -32,35 +32,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.create = void 0;
-const http_status_codes_1 = require("http-status-codes");
+exports.create = exports.createValidation = exports.createBodyValidator = void 0;
 const yup = __importStar(require("yup"));
+const middlewares_1 = require("../../shared/middlewares");
 const bodyValidation = yup.object().shape({
     name: yup.string().required().min(3),
-    estado: yup.string().required().min(3),
+    state: yup.string().required().min(3),
 });
+const queryValidation = yup.object().shape({
+    filter: yup.string().required().min(3),
+});
+exports.createBodyValidator = (0, middlewares_1.validation)("body", bodyValidation);
+exports.createValidation = (0, middlewares_1.validation)("query", queryValidation);
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let validatedData = undefined;
-    try {
-        validatedData = yield bodyValidation.validate(req.body, {
-            abortEarly: false,
-        });
-    }
-    catch (error) {
-        const yupError = error;
-        // record é um objeto que possui chaves de um tipo especifico e valores de outro tipo especifico
-        const validationErrors = {};
-        yupError.inner.forEach((error) => {
-            if (error.path === undefined)
-                return;
-            // atribuindo mensagem de erro ao erro mapeado
-            validationErrors[error.path] = error.message;
-        });
-        return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
-            errors: validationErrors,
-        });
-    }
-    console.log(validatedData);
+    console.log(req.body);
     return res.send("Create!");
 });
 exports.create = create;
