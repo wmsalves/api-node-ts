@@ -24,5 +24,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CitiesController = void 0;
+const deleteById = __importStar(require("./deleteById"));
+const updateById = __importStar(require("./updateById"));
+const getById = __importStar(require("./getById"));
 const create = __importStar(require("./create"));
-exports.CitiesController = Object.assign({}, create);
+const getAll = __importStar(require("./getAll"));
+exports.CitiesController = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, deleteById), updateById), getById), create), getAll);
