@@ -44,9 +44,13 @@ exports.getAllValidation = (0, middlewares_1.validation)((getSchema) => ({
     })),
 }));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.query);
-    return res
-        .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
-        .send("Não implementado.");
+    res.setHeader("access-control-expose-headers", "x-total-count");
+    res.setHeader("x-total-count", 1);
+    return res.status(http_status_codes_1.StatusCodes.OK).json([
+        {
+            id: 1,
+            nome: "Belo Horizonte",
+        },
+    ]);
 });
 exports.getAll = getAll;

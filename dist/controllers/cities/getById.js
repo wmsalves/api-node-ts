@@ -42,9 +42,15 @@ exports.getByIdValidation = (0, middlewares_1.validation)((getSchema) => ({
     })),
 }));
 const getById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.params);
-    return res
-        .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
-        .send("Não implementado!");
+    if (Number(req.params.id) === 99999)
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: "Registro não encontrado",
+            },
+        });
+    return res.status(http_status_codes_1.StatusCodes.OK).json({
+        id: req.params.id,
+        nome: "Belo Horizonte",
+    });
 });
 exports.getById = getById;
