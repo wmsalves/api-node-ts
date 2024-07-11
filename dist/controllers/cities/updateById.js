@@ -36,7 +36,7 @@ exports.updateById = exports.updateByIdValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
-exports.updateByIdValidation = (0, middlewares_1.validation)(getSchema => ({
+exports.updateByIdValidation = (0, middlewares_1.validation)((getSchema) => ({
     body: getSchema(yup.object().shape({
         nome: yup.string().required().min(3),
     })),
@@ -47,6 +47,8 @@ exports.updateByIdValidation = (0, middlewares_1.validation)(getSchema => ({
 const updateById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.params);
     console.log(req.body);
-    return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado!');
+    return res
+        .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
+        .send("Não implementado!");
 });
 exports.updateById = updateById;

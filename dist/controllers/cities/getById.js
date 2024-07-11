@@ -36,13 +36,15 @@ exports.getById = exports.getByIdValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
-exports.getByIdValidation = (0, middlewares_1.validation)(getSchema => ({
+exports.getByIdValidation = (0, middlewares_1.validation)((getSchema) => ({
     params: getSchema(yup.object().shape({
         id: yup.number().integer().required().moreThan(0),
     })),
 }));
 const getById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.params);
-    return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado!');
+    return res
+        .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
+        .send("Não implementado!");
 });
 exports.getById = getById;

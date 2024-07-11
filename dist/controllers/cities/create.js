@@ -43,6 +43,8 @@ exports.createValidation = (0, middlewares_1.validation)((getSchema) => ({
 }));
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
-    return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send("Não implementado.");
+    return res
+        .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
+        .send("Não implementado.");
 });
 exports.create = create;
