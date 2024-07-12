@@ -6,18 +6,18 @@ describe("Cidades - UpdateById", () => {
   it("Atualiza registro", async () => {
     const res1 = await testServer
       .post("/cities")
-      .send({ nome: "Belo Horizonte" });
+      .send({ name: "Belo Horizonte" });
 
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
     const resAtualizada = await testServer
       .put(`/cities/${res1.body}`)
-      .send({ nome: "Belo" });
+      .send({ name: "Belo" });
 
     expect(resAtualizada.statusCode).toEqual(StatusCodes.NO_CONTENT);
   });
   it("Tenta atualizar registro que não existe", async () => {
-    const res1 = await testServer.put("/cities/99999").send({ nome: "Belo" });
+    const res1 = await testServer.put("/cities/99999").send({ name: "Belo" });
 
     expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     expect(res1.body).toHaveProperty("errors.default");

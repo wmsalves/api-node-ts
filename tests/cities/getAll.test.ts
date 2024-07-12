@@ -6,7 +6,7 @@ describe("Cidades - GetAll", () => {
   it("Buscar todos os registros", async () => {
     const res1 = await testServer
       .post("/cities")
-      .send({ nome: "Belo Horizonte" });
+      .send({ name: "Belo Horizonte" });
 
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 

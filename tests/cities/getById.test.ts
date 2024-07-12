@@ -6,7 +6,7 @@ describe("Cidades - GetById", () => {
   it("Busca registro por id", async () => {
     const res1 = await testServer
       .post("/cities")
-      .send({ nome: "Belo Horizonte" });
+      .send({ name: "Belo Horizonte" });
 
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
@@ -14,7 +14,7 @@ describe("Cidades - GetById", () => {
     const resBuscada = await testServer.get(`/cities/${res1.body}`).send();
 
     expect(resBuscada.statusCode).toEqual(StatusCodes.OK);
-    expect(resBuscada.body).toHaveProperty("nome");
+    expect(resBuscada.body).toHaveProperty("name");
   });
   it("Tenta buscar registro que não existe", async () => {
     const res1 = await testServer.get("/cities/99999").send();

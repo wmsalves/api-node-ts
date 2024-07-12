@@ -8,12 +8,12 @@ interface IParamProps {
   id?: number;
 }
 interface IBodyProps {
-  nome: string;
+  name: string;
 }
 export const updateByIdValidation = validation((getSchema) => ({
   body: getSchema<IBodyProps>(
     yup.object().shape({
-      nome: yup.string().required().min(3),
+      name: yup.string().required().min(3),
     })
   ),
   params: getSchema<IParamProps>(

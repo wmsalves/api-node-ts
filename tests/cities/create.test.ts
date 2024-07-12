@@ -11,9 +11,9 @@ describe("Cities - Create", () => {
     expect(typeof res1.body).toEqual("number");
   });
   it("Tenta criar um registro com nome muito curto", async () => {
-    const res1 = await testServer.post("/cities").send({ nome: "Be" });
+    const res1 = await testServer.post("/cities").send({ name: "Be" });
 
     expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
-    expect(res1.body).toHaveProperty("errors.body.nome");
+    expect(res1.body).toHaveProperty("errors.body.name");
   });
 });
