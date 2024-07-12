@@ -10,6 +10,7 @@ describe("Cidades - GetById", () => {
 
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
+    const cityId = res1.body.id
     const resBuscada = await testServer.get(`/cities/${res1.body}`).send();
 
     expect(resBuscada.statusCode).toEqual(StatusCodes.OK);
