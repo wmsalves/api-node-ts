@@ -10,13 +10,11 @@ interface IQueryProps {
 }
 
 export const getAllValidation = validation((getSchema) => ({
-  body: getSchema<IQueryProps>(
-    yup.object().shape({
-      page: yup.number().notRequired().moreThan(0),
-      limit: yup.number().notRequired().moreThan(0),
-      filter: yup.string().required(),
-    })
-  ),
+  query: getSchema<IQueryProps>(yup.object().shape({
+    page: yup.number().notRequired().moreThan(0),
+    limit: yup.number().notRequired().moreThan(0),
+    filter: yup.string().notRequired(),
+  })),
 }));
 
 export const getAll = async (

@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -33,10 +37,10 @@ const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
 const http_status_codes_1 = require("http-status-codes");
 exports.getAllValidation = (0, middlewares_1.validation)((getSchema) => ({
-    body: getSchema(yup.object().shape({
+    query: getSchema(yup.object().shape({
         page: yup.number().notRequired().moreThan(0),
         limit: yup.number().notRequired().moreThan(0),
-        filter: yup.string().required(),
+        filter: yup.string().notRequired(),
     })),
 }));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
