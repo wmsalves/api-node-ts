@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "knex:rollback-all": "knex --knexfile ./src/server/database/knex/environment.ts migrate:rollback --all",
-    "knex:rollback": "knex --knexfile ./src/server/database/knex/environment.ts migrate:rollback",
-    "knex:migrate": "knex --knexfile ./src/server/database/knex/environment.ts migrate:latest",
-    "knex:seed": "knex --knexfile ./src/server/database/knex/environment.ts seed:run",
+    "knex:rollback-all": "knex --knexfile ./src/database/knex/environment.ts migrate:rollback --all",
+    "knex:rollback": "knex --knexfile ./src/database/knex/environment.ts migrate:rollback",
+    "knex:migrate": "knex --knexfile ./src/database/knex/environment.ts migrate:latest",
+    "knex:seed": "knex --knexfile ./src/database/knex/environment.ts seed:run",
     "test": "jest",
     "build": "tsc",
     "start": "ts-node-dev ./src/index.ts"
@@ -22,6 +22,7 @@
     "http": "^0.0.1-security",
     "jest": "^29.7.0",
     "knex": "^3.1.0",
+    "sqlite": "^5.1.1",
     "ts-jest": "^29.2.2",
     "yup": "^1.4.0"
   },

@@ -10,7 +10,6 @@ export const development: Knex.Config = {
       "..",
       "..",
       "..",
-      "..",
       "database.sqlite"
     ),
   },
