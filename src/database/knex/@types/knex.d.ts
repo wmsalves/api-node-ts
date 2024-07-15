@@ -1,7 +1,9 @@
-declare module 'knex/types/tables' {
-    interface Tables {
-      // cities: ICities
-      // person: IPerson
-      // user: IUser
-    }
+import { ICity } from "../../models";
+
+declare module "knex/types/tables" {
+  interface Tables {
+    city: ICity;
+    // person: IPerson
+    // user: IUser
   }
+}
