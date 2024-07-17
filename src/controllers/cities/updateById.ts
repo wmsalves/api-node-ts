@@ -1,18 +1,20 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
-
 import { validation } from "../../shared/middlewares";
 import { ICity } from "../../database/models";
+import { CitiesProvider } from "../../database/providers/cities";
 
 interface IParamProps {
   id?: number;
 }
+
 interface IBodyProps extends Omit<ICity, "id"> {}
+
 export const updateByIdValidation = validation((getSchema) => ({
   body: getSchema<IBodyProps>(
     yup.object().shape({
-      name: yup.string().required().min(3),
+      nome: yup.string().required().min(3),
     })
   ),
   params: getSchema<IParamProps>(
@@ -26,12 +28,22 @@ export const updateById = async (
   req: Request<IParamProps, {}, IBodyProps>,
   res: Response
 ) => {
-  if (Number(req.params.id) === 99999)
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
       errors: {
-        default: "Registro não encontrado",
+        default: 'O parâmetro "id" precisa ser informado.',
       },
     });
+  }
 
-  return res.status(StatusCodes.NO_CONTENT).send();
+  const result = await CitiesProvider.updateById(req.params.id, req.body);
+  if (result instanceof Error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: {
+        default: result.message,
+      },
+    });
+  }
+
+  return res.status(StatusCodes.NO_CONTENT).json(result);
 };

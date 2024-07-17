@@ -1,3 +1,4 @@
+// src/database/providers/cities/deleteById.ts
 import { ETableNames } from "../../ETableNames";
 import { Knex } from "../../knex";
 
