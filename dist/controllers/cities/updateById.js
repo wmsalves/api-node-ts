@@ -36,21 +36,31 @@ exports.updateById = exports.updateByIdValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
+const cities_1 = require("../../database/providers/cities");
 exports.updateByIdValidation = (0, middlewares_1.validation)((getSchema) => ({
     body: getSchema(yup.object().shape({
-        nome: yup.string().required().min(3),
+        name: yup.string().required().min(3),
     })),
     params: getSchema(yup.object().shape({
         id: yup.number().integer().required().moreThan(0),
     })),
 }));
 const updateById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (Number(req.params.id) === 99999)
-        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+    if (!req.params.id) {
+        return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
             errors: {
-                default: "Registro não encontrado",
+                default: 'O parâmetro "id" precisa ser informado.',
             },
         });
-    return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).send();
+    }
+    const result = yield cities_1.CitiesProvider.updateById(req.params.id, req.body);
+    if (result instanceof Error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message,
+            },
+        });
+    }
+    return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).json(result);
 });
 exports.updateById = updateById;

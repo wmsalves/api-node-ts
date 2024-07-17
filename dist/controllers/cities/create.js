@@ -36,12 +36,21 @@ exports.create = exports.createValidation = void 0;
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
 const http_status_codes_1 = require("http-status-codes");
+const cities_1 = require("../../database/providers/cities");
 exports.createValidation = (0, middlewares_1.validation)((getSchema) => ({
     body: getSchema(yup.object().shape({
-        name: yup.string().required().min(3),
+        name: yup.string().required().min(3).max(150),
     })),
 }));
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    return res.status(http_status_codes_1.StatusCodes.CREATED).json(1);
+    const result = yield cities_1.CitiesProvider.create(req.body);
+    if (result instanceof Error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message,
+            },
+        });
+    }
+    return res.status(http_status_codes_1.StatusCodes.CREATED).json(result);
 });
 exports.create = create;

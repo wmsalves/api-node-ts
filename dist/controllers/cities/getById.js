@@ -36,21 +36,28 @@ exports.getById = exports.getByIdValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
+const cities_1 = require("../../database/providers/cities");
 exports.getByIdValidation = (0, middlewares_1.validation)((getSchema) => ({
     params: getSchema(yup.object().shape({
         id: yup.number().integer().required().moreThan(0),
     })),
 }));
 const getById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (Number(req.params.id) === 99999)
-        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+    if (!req.params.id) {
+        return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
             errors: {
-                default: "Registro não encontrado",
+                default: 'O parâmetro "id" precisa ser informado.',
             },
         });
-    return res.status(http_status_codes_1.StatusCodes.OK).json({
-        id: req.params.id,
-        nome: "Belo Horizonte",
-    });
+    }
+    const result = yield cities_1.CitiesProvider.getById(req.params.id);
+    if (result instanceof Error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message,
+            },
+        });
+    }
+    return res.status(http_status_codes_1.StatusCodes.OK).json(result);
 });
 exports.getById = getById;
