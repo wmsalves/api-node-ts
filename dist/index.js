@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const knex_1 = require("./database/knex");
+const knex_1 = require("./database/knex/environment.js");
 const server_1 = require("./server");
 const startServer = () => {
     server_1.server.listen(process.env.PORT || 3000, () => {
