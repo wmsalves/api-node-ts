@@ -13,4 +13,9 @@ router.post("/cities", controllers_1.CitiesController.createValidation, controll
 router.get("/cities/:id", controllers_1.CitiesController.getByIdValidation, controllers_1.CitiesController.getById);
 router.put("/cities/:id", controllers_1.CitiesController.updateByIdValidation, controllers_1.CitiesController.updateById);
 router.delete("/cities/:id", controllers_1.CitiesController.deleteByIdValidation, controllers_1.CitiesController.deleteById);
+router.get("/persons", controllers_1.PersonController.getAllValidation, controllers_1.PersonController.getAll);
+router.post("/persons", controllers_1.PersonController.createValidation, controllers_1.PersonController.create);
+router.get("/persons/:id", controllers_1.PersonController.getByIdValidation, controllers_1.PersonController.getById);
+router.put("/persons/:id", controllers_1.PersonController.updateByIdValidation, controllers_1.PersonController.updateById);
+router.delete("/persons/:id", controllers_1.PersonController.deleteByIdValidation, controllers_1.PersonController.deleteById);
 //# sourceMappingURL=main.js.map

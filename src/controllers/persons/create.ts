@@ -25,6 +25,7 @@ export const create = async (
   const result = await PersonProvider.create(req.body);
 
   if (result instanceof Error) {
+    console.log(Error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
         default: result.message,

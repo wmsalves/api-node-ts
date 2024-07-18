@@ -16,8 +16,8 @@ export const updateByIdValidation = validation((get) => ({
   body: get<IBodyProps>(
     yup.object().shape({
       email: yup.string().required().email(),
-      cidadeId: yup.number().integer().required(),
-      nomeCompleto: yup.string().required().min(3),
+      cityId: yup.number().integer().required(),
+      fullName: yup.string().required().min(3),
     })
   ),
   params: get<IParamProps>(
