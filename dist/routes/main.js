@@ -13,3 +13,4 @@ router.post("/cities", controllers_1.CitiesController.createValidation, controll
 router.get("/cities/:id", controllers_1.CitiesController.getByIdValidation, controllers_1.CitiesController.getById);
 router.put("/cities/:id", controllers_1.CitiesController.updateByIdValidation, controllers_1.CitiesController.updateById);
 router.delete("/cities/:id", controllers_1.CitiesController.deleteByIdValidation, controllers_1.CitiesController.deleteById);
+//# sourceMappingURL=main.js.map

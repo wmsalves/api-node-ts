@@ -44,3 +44,4 @@ const validation = (getAllSchemas) => (req, res, next) => __awaiter(void 0, void
     }
 });
 exports.validation = validation;
+//# sourceMappingURL=validation.js.map

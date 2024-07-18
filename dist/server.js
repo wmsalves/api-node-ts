@@ -12,3 +12,4 @@ const server = (0, express_1.default)();
 exports.server = server;
 server.use(express_1.default.json());
 server.use(main_1.router);
+//# sourceMappingURL=server.js.map

@@ -61,3 +61,4 @@ const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).send();
 });
 exports.deleteById = deleteById;
+//# sourceMappingURL=deleteById.js.map

@@ -63,3 +63,4 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.StatusCodes.OK).json(result);
 });
 exports.getAll = getAll;
+//# sourceMappingURL=getAll.js.map

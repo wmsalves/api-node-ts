@@ -54,3 +54,4 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.StatusCodes.CREATED).json(result);
 });
 exports.create = create;
+//# sourceMappingURL=create.js.map

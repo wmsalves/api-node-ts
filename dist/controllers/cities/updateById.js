@@ -64,3 +64,4 @@ const updateById = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).json(result);
 });
 exports.updateById = updateById;
+//# sourceMappingURL=updateById.js.map

@@ -30,3 +30,4 @@ const getById = __importStar(require("./getById"));
 const create = __importStar(require("./create"));
 const getAll = __importStar(require("./getAll"));
 exports.CitiesController = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, deleteById), updateById), getById), create), getAll);
+//# sourceMappingURL=index.js.map
