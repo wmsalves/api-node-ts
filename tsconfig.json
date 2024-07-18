@@ -108,7 +108,6 @@
   "exclude": [
     "./jest.config.ts",
     "./node_modules",
-    "./tests",
-    "./dist"
+    "./tests"
   ]
 }
