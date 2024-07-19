@@ -4,6 +4,7 @@ import { validation } from "../../shared/middlewares";
 import { StatusCodes } from "http-status-codes";
 import { IUser } from "../../database/models";
 import { UsersProvider } from "../../database/providers/users";
+import { PasswordCryto } from "../../shared/services";
 
 interface IBodyProps extends Omit<IUser, "id" | "name"> {}
 
@@ -27,13 +28,21 @@ export const signIn = async (req: Request<{}, {}, IUser>, res: Response) => {
       },
     });
   }
-  if (password !== result.password) {
+
+  const passwordMatch = await PasswordCryto.verifyPassword(
+    password,
+    result.password
+  );
+
+  if (!passwordMatch) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       errors: {
         default: "Email ou senha são incorretos.",
       },
     });
   } else {
-    return res.status(StatusCodes.OK).json({accessToken: 'teste.teste.teste'});
+    return res
+      .status(StatusCodes.OK)
+      .json({ accessToken: "teste.teste.teste" });
   }
 };
