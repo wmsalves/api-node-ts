@@ -15,3 +15,5 @@ const getEnvironment = () => {
 };
 
 export const Knex = knex(getEnvironment());
+
+export default Knex;
