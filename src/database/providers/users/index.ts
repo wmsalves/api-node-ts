@@ -3,7 +3,7 @@ import * as create from './create';
 
 
 
-export const UsersController = {
+export const UsersProvider = {
   ...getByEmail,
   ...create,
 };
