@@ -15,15 +15,14 @@ describe("Cities - Create", () => {
     accessToken = signInRes.body.accessToken;
   });
 
-  it("Tenta criar registro sem token de acesso"),
-    async () => {
-      const res1 = await testServer
-        .post("/cities")
-        .send({ name: "Belo Horizonte" });
+  it("Tenta criar registro sem token de acesso", async () => {
+    const res1 = await testServer
+      .post("/cities")
+      .send({ name: "Belo Horizonte" });
 
-      expect(res1.statusCode).toEqual(StatusCodes.UNAUTHORIZED);
-      expect(typeof res1.body).toHaveProperty("errors.default");
-    };
+    expect(res1.statusCode).toEqual(StatusCodes.UNAUTHORIZED);
+    expect(res1.body).toHaveProperty("errors.default");
+  });
 
   it("Criar registro", async () => {
     const res1 = await testServer
@@ -40,7 +39,7 @@ describe("Cities - Create", () => {
     const res1 = await testServer
       .post("/cities")
       .set({ Authorization: `Bearer ${accessToken}` })
-      .send({ name: "Bel" });
+      .send({ name: "Be" });
 
     expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
     expect(res1.body).toHaveProperty("errors.body.name");
