@@ -29,17 +29,17 @@ Você vai precisar do nodens instalado no seu computador para rodar o projeto.
 
 Clone o repositório:
 ```
-$ git clone https://github.com/lvsouza/youtube-curso-react-materialui-typescript.git
+$ git clone https://github.com/wmsalves/api-node-ts.git
 ```
 
 Entre na pasta
 ```
-$ cd youtube-curso-react-materialui-typescript
+$ cd api-node-ts
 ```
 
 Instale as dependências
 ```
-$ yarn install
+$ npm install
 ```
 
 Configure as variáveis ambiente, crie o arquivo `.env` na pasta raiz do projeto coloque o conteúdo a seguir dentro
@@ -55,5 +55,5 @@ JWT_SECRET=[Uma string qualquer]
 
 Rode o projeto
 ```
-$ yarn start
+$ npm start
 ```
